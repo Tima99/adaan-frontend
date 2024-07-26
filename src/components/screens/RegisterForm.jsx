@@ -46,6 +46,8 @@ const RegisterForm = () => {
 
       <form onSubmit={handleSubmit(submitHandler)}>
         <IWraper errors={errors} register={register}>
+          <Input label={"Name"} type="text" name="name" />
+          <Input label={"Phone"} type="number" name="phone" />
           <Input label={"Email"} type="email" name="email" />
           <Input label={"Password"} type="password" name="password" />
           <Input

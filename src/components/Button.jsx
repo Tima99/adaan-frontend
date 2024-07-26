@@ -12,7 +12,7 @@ function Button({ children, className, ...rest }) {
 }
 function Right({ leftElement, ...rest }) {
   return (
-    <div className="w-full flex justify-between items-center">
+    <div className="w-full flex justify-end">
       {leftElement}
       <Button {...rest}></Button>
     </div>
