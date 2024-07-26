@@ -9,7 +9,7 @@ import GodFatherAk from "../assets/ak47.jpg";
 import Smash from "../assets/smash.jpg";
 import getRandomNumber from './../utils/getRandomNumber';
 
-const Gallery = [GodFatherAk, GodFatherBanner, Smash];
+const Gallery = [GodFatherAk, Smash, GodFatherBanner];
 
 const Register = () => {
   const form = useForm({
