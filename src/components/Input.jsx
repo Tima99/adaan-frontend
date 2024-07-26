@@ -19,6 +19,7 @@ function Input({ label, name, validation, ...rest }) {
     validation: defaultValidation,
   } = useContext(InputContext);
   const id = useId();
+  const errorMsg = errors?.[name]?.message;
 
   return (
     <label htmlFor={id}>
@@ -30,9 +31,7 @@ function Input({ label, name, validation, ...rest }) {
           {...rest}
           {...register(name, validation || defaultValidation)}
         />
-        {errors?.[name]?.type === "required" && (
-          <p className="text-red-500 text-xs">This field is required</p>
-        )}
+        {errorMsg && <p className="text-red-500 text-xs">{errorMsg}</p>}
       </div>
     </label>
   );

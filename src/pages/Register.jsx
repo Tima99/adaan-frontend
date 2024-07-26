@@ -1,15 +1,18 @@
 import Input, { IWraper } from "../components/Input";
 import { useForm } from "react-hook-form";
 import Button from "../components/Button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import schema from "../validations/Resgiter";
 
 const Register = () => {
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(schema),
+  });
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-    watch,
   } = form;
 
   function submitHandler(data) {
@@ -24,11 +27,7 @@ const Register = () => {
           <h2 className="text-2xl mb-6">Register</h2>
 
           <form onSubmit={handleSubmit(submitHandler)}>
-            <IWraper
-              errors={errors}
-              register={register}
-              validation={{ required: true }}
-            >
+            <IWraper errors={errors} register={register}>
               <Input label={"Email"} type="email" name="email" />
               <Input label={"Password"} type="password" name="password" />
               <Input
