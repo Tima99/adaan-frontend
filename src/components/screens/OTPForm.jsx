@@ -10,8 +10,13 @@ const OTPForm = () => {
     return (ev) => {
       const { value } = ev.target;
 
-      setOtpBoxes(otpBoxes.toSpliced(index, 1, value));
-      inputRefs.current[index + 1].focus();
+      const enteredValue = otpBoxes.toSpliced(index, 1, value);
+      const newValue = enteredValue[index];
+
+      newValue?.length <= 1 && setOtpBoxes(enteredValue);
+
+      const focusIndex = newValue === "" ? index - 1 : index + 1;
+      inputRefs.current[focusIndex]?.focus();
     };
   }
 
