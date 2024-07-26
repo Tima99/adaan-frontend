@@ -7,6 +7,7 @@ import NavLayout from "./components/layouts/NavLayout";
 import { DesignProvider } from "./contexts/DesignIndexContext";
 import BasicDetails from "./components/screens/EditProfile/BasicDetails";
 import ContactDetails from "./components/screens/EditProfile/ContactDetails";
+import PastExperience from "./components/screens/EditProfile/PastExperience";
 
 function App() {
     return (
@@ -17,7 +18,8 @@ function App() {
                     <Route path="edit" element={<EditProfile />}>
                         <Route path="basic" element={<BasicDetails />} />
                         <Route path="contact" element={<ContactDetails />} />
-                    </Route>{" "}
+                        <Route path="experience" element={<PastExperience />} />
+                    </Route>
                 </Route>
                 <Route path="/auth" element={<Auth />} />
             </Routes>
