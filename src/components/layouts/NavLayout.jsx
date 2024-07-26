@@ -18,7 +18,7 @@ const NavLayout = () => {
 
                 <div className="flex gap-6">
                     <button title={"Toggle Layout"} className="text-[1.75rem]">
-                        <Link to={"/edit"}>
+                        <Link to={"/edit/basic"}>
                             <FiEdit />
                         </Link>
                     </button>

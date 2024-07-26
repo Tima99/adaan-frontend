@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import EditProfile from "./pages/EditProfile";
 import NavLayout from "./components/layouts/NavLayout";
 import { DesignProvider } from "./contexts/DesignIndexContext";
+import BasicDetails from "./components/screens/EditProfile/BasicDetails";
+import ContactDetails from "./components/screens/EditProfile/ContactDetails";
 
 function App() {
     return (
@@ -12,7 +14,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<NavLayout />}>
                     <Route index element={<Home />} />
-                    <Route path="/edit" element={<EditProfile />} />
+                    <Route path="edit" element={<EditProfile />}>
+                        <Route path="basic" element={<BasicDetails />} />
+                        <Route path="contact" element={<ContactDetails />} />
+                    </Route>{" "}
                 </Route>
                 <Route path="/auth" element={<Auth />} />
             </Routes>
