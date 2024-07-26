@@ -1,7 +1,7 @@
 import GodFatherBanner from "../assets/godFather.jpg";
 import GodFatherAk from "../assets/ak47.jpg";
 import Smash from "../assets/smash.jpg";
-import getRandomNumber from "./../utils/getRandomNumber";
+import getRandomNumber from "../utils/getRandomNumber";
 import AuthForm from "../components/screens/AuthForm";
 
 const Gallery = [Smash, GodFatherAk, GodFatherBanner];

@@ -1,11 +1,11 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Register from "./pages/Register";
+import Auth from "./pages/Auth";
 
 function App() {
     return (
         <Routes>
-            <Route path="/auth" element={<Register />}></Route>
+            <Route path="/auth" element={<Auth />}></Route>
         </Routes>
     );
 }
