@@ -4,7 +4,7 @@ const schema = z
   .object({
     name: z
       .string()
-      .min(3, { message: "Name at least 3 characters long " })
+      .min(3, { message: "Name at least 3 characters long" })
       .max(15, { message: "Name can be maximum of 15 characters" }),
     phone: z
       .string()

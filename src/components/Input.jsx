@@ -26,7 +26,7 @@ function Input({ label, name, validation, ...rest }) {
       <div className="flex justify-between">
         <span className="font-semibold text-sm">{label}</span>
         {errorMsg && (
-          <p className="text-red-500 text-xs font-medium animate-[pulse_1s_ease-in_1_reverse]">
+          <p className="text-red-500 text-xs font-medium animate-[pulse_1s_ease-in_1_reverse] text-end">
             {errorMsg}
           </p>
         )}

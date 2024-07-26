@@ -1,16 +1,12 @@
+/* eslint-disable react/prop-types */
+import GodFatherLogo from "../../assets/the-godfather.svg";
+import Button from "../Button";
+import Input, { IWraper } from "../Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import schema from "../../validations/Register";
-import Button from "../Button";
-import Input, { IWraper } from "../Input";
-import Modal from "../Modal";
-import LoginForm from "./LoginForm";
-import { useState } from "react";
-import GodFatherLogo from "../../assets/the-godfather.svg";
 
-const RegisterForm = () => {
-  const [openLoginModal, setOpenLoginModal] = useState(false);
-
+const RegisterForm = ({ toLogin }) => {
   const form = useForm({
     resolver: zodResolver(schema),
   });
@@ -25,11 +21,7 @@ const RegisterForm = () => {
     console.log(data);
   }
 
-  return openLoginModal ? (
-    <Modal onClose={setOpenLoginModal}>
-      <LoginForm></LoginForm>
-    </Modal>
-  ) : (
+  return (
     <div className="bg-white 2xl:flex-[0.5] flex-[0.6] p-6 flex flex-col">
       <h1 className="-translate-y-10 flex justify-center">
         <img src={GodFatherLogo} alt="" width={220} />
@@ -37,7 +29,7 @@ const RegisterForm = () => {
       <div className="text-xl mb-6 flex justify-between items-center">
         <h1 className="text-2xl">Register</h1>
         <span
-          onClick={() => setOpenLoginModal(true)}
+          onClick={() => toLogin(true)}
           className="cursor-pointer hover:underline"
         >
           Login
