@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 function App() {
     return (
         <Routes>
-            <Route path="/register" element={<Register />}></Route>
+            <Route path="/auth" element={<Register />}></Route>
         </Routes>
     );
 }

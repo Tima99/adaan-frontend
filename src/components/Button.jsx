@@ -10,9 +10,10 @@ function Button({ children, className, ...rest }) {
     </button>
   );
 }
-function Right({ ...rest }) {
+function Right({ leftElement, ...rest }) {
   return (
-    <div className="w-full flex justify-end">
+    <div className="w-full flex justify-between items-center">
+      {leftElement}
       <Button {...rest}></Button>
     </div>
   );
