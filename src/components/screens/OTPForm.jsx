@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 import Heading from "../Headings";
 import Button from "../Button";
+import { FORM_ENUMS } from "./AuthForm";
 
-const OTPForm = () => {
+const OTPForm = ({ setFormState }) => {
   const [otpBoxes, setOtpBoxes] = useState(Array(6).fill(null));
   const inputRefs = useRef([]);
 
@@ -26,7 +28,17 @@ const OTPForm = () => {
 
   return (
     <>
-      <Heading>OTP</Heading>
+      <Heading>
+        <div className="flex gap-2 items-center justify-between">
+          <span>OTP</span>
+          <span
+            onClick={() => setFormState(FORM_ENUMS.REGISTER)}
+            className="text-base hover:underline cursor-pointer"
+          >
+            New Registration ?
+          </span>
+        </div>
+      </Heading>
       <div className="flex gap-4 justify-center my-8">
         {otpBoxes.map((_, index) => {
           return (

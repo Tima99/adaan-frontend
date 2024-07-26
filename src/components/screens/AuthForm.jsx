@@ -3,7 +3,6 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { useState } from "react";
 import GodFatherLogo from "../../assets/the-godfather.svg";
-import Heading from "../Headings";
 import OTPForm from "./OTPForm";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -28,7 +27,7 @@ const AuthForm = () => {
       {formState === FORM_ENUMS.REGISTER ? (
         <RegisterForm setFormState={setFormState} />
       ) : (
-        <OTPForm />
+        <OTPForm setFormState={setFormState} />
       )}
     </div>
   );
