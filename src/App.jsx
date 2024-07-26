@@ -2,13 +2,19 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
+import NavLayout from "./components/layouts/NavLayout";
+import { DesignProvider } from "./contexts/DesignIndexContext";
 
 function App() {
     return (
-        <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/auth" element={<Auth />}></Route>
-        </Routes>
+        <DesignProvider>
+            <Routes>
+                <Route path="/" element={<NavLayout />}>
+                    <Route index element={<Home />} />
+                </Route>
+                <Route path="/auth" element={<Auth />} />
+            </Routes>
+        </DesignProvider>
     );
 }
 
