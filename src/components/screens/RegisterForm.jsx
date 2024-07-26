@@ -5,8 +5,9 @@ import Input, { IWraper } from "../Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import schema from "../../validations/Register";
+import { FORM_ENUMS } from "./AuthForm";
 
-const RegisterForm = ({ toLogin }) => {
+const RegisterForm = ({ setFormState }) => {
   const form = useForm({
     resolver: zodResolver(schema),
   });
@@ -19,6 +20,7 @@ const RegisterForm = ({ toLogin }) => {
 
   function submitHandler(data) {
     console.log(data);
+    setFormState(FORM_ENUMS.OTP)
   }
 
   return (
@@ -29,7 +31,7 @@ const RegisterForm = ({ toLogin }) => {
       <div className="text-xl mb-6 flex justify-between items-center">
         <h1 className="text-2xl">Register</h1>
         <span
-          onClick={() => toLogin(true)}
+          onClick={() => setFormState(FORM_ENUMS.LOGIN)}
           className="cursor-pointer hover:underline"
         >
           Login
