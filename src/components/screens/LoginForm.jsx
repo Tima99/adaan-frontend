@@ -4,10 +4,12 @@ import Input, { IWraper } from "../Input";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
+import OTPForm from "./OTPForm";
 
 const LoginForm = () => {
   const [icon, setIcon] = useState();
   const [type, setType] = useState("password");
+  const [loginType, setLoginType] = useState("password");
 
   const {
     register,
@@ -27,7 +29,7 @@ const LoginForm = () => {
 
   function onSubmit() {}
 
-  return (
+  return loginType === "password" ? (
     <>
       <div className="flex justify-between items-center mx-5">
         <h1 className="font-bold text-2xl ">Log In</h1>
@@ -59,11 +61,20 @@ const LoginForm = () => {
           </div>
         </IWraper>
 
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        <div className="flex gap-4">
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+          <Button type="button" onClick={() => setLoginType("otp")}>
+            Login via OTP
+          </Button>
+        </div>
       </form>
     </>
+  ) : (
+    <div className="flex flex-col">
+      <OTPForm noRegistrationLink={true} />
+    </div>
   );
 };
 

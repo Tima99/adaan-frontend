@@ -4,7 +4,7 @@ import Heading from "../Headings";
 import Button from "../Button";
 import { FORM_ENUMS } from "./AuthForm";
 
-const OTPForm = ({ setFormState }) => {
+const OTPForm = ({ setFormState, noRegistrationLink = false }) => {
   const [otpBoxes, setOtpBoxes] = useState(Array(6).fill(null));
   const inputRefs = useRef([]);
 
@@ -31,12 +31,14 @@ const OTPForm = ({ setFormState }) => {
       <Heading>
         <div className="flex gap-2 items-center justify-between">
           <span>OTP</span>
-          <span
-            onClick={() => setFormState(FORM_ENUMS.REGISTER)}
-            className="text-base hover:underline cursor-pointer"
-          >
-            New Registration ?
-          </span>
+          {!noRegistrationLink && (
+            <span
+              onClick={() => setFormState(FORM_ENUMS.REGISTER)}
+              className="text-base hover:underline cursor-pointer"
+            >
+              New Registration ?
+            </span>
+          )}
         </div>
       </Heading>
       <div className="flex gap-4 justify-center my-8">
