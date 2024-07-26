@@ -57,7 +57,7 @@ const RegisterForm = () => {
           />
         </IWraper>
 
-        <Button.Right className={"my-4"} type="submit">
+        <Button.Right className={"my-7"} type="submit">
           Save
         </Button.Right>
       </form>
