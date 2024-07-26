@@ -2,7 +2,14 @@ import Input, { IWraper } from "../components/Input";
 import { useForm } from "react-hook-form";
 import Button from "../components/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import schema from "../validations/Resgiter";
+import schema from "../validations/Register";
+import GodFatherLogo from "../assets/the-godfather.svg";
+import GodFatherBanner from "../assets/godFather.jpg";
+import GodFatherAk from "../assets/ak47.jpg";
+import Smash from "../assets/smash.jpg";
+import getRandomNumber from './../utils/getRandomNumber';
+
+const Gallery = [GodFatherAk, GodFatherBanner, Smash];
 
 const Register = () => {
   const form = useForm({
@@ -21,9 +28,11 @@ const Register = () => {
 
   return (
     <div className="w-full h-screen flex">
-      <div className="bg-white flex-[0.6] p-6 flex flex-col gap-16">
-        <h1>Mirror</h1>
-        <div className="">
+      <div className="bg-white 2xl:flex-[0.5] flex-[0.6] p-6 flex flex-col">
+        <h1 className="-translate-y-10 flex justify-center">
+          <img src={GodFatherLogo} alt="" width={220} />
+        </h1>
+        <div>
           <h2 className="text-2xl mb-6">Register</h2>
 
           <form onSubmit={handleSubmit(submitHandler)}>
@@ -44,7 +53,13 @@ const Register = () => {
         </div>
       </div>
 
-      <div className="bg-green-400 flex-1"></div>
+      <div className="bg-green-400 flex-1">
+        <img
+          src={Gallery[getRandomNumber()]}
+          alt=""
+          className="w-full h-full"
+        />
+      </div>
     </div>
   );
 };
