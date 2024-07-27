@@ -2,55 +2,83 @@
 import GodFatherLogo from "../../assets/the-godfather.svg";
 import { FiEdit } from "react-icons/fi";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { useContext } from "react";
-import { DesignContext } from "../../contexts/DesignIndexContext";
-import { Link, Outlet } from "react-router-dom";
+import { useCallback, useContext } from "react";
+import { AUTH_STATE, DesignContext } from "../../contexts/DesignIndexContext";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
 import Button from "../Button";
+import { useEffect } from "react";
 
 const NavLayout = () => {
-  const { designIndex, handleToggle } = useContext(DesignContext);
+    const { designIndex, authState, handleToggle, handleAuthState } =
+        useContext(DesignContext);
 
-  return (
-    <div className="container mx-auto p-5 pt-0">
-      <div className="flex justify-between mb-4 sticky top-0 bg-white">
-        <Link to="/" className="max-w-16">
-          <img src={GodFatherLogo} alt="" />
-        </Link>
+    const navigate = useNavigate();
 
-        <div className="flex gap-6 items-center">
-          <button title={"Home"} className="text-[1.75rem]">
-            <Link to="/">
-              <FiHome />
-            </Link>
-          </button>
+    const checkUserAuth = useCallback(() => {
+        let user = localStorage.getItem("USER");
+        user = user && JSON.parse(user);
 
-          <button title={"Edit Profile"} className="text-[1.75rem]">
-            <Link to={"/edit/basic"}>
-              <FiEdit />
-            </Link>
-          </button>
+        if (user?._id) return handleAuthState(AUTH_STATE.AUTHENTIC);
 
-          <button
-            onClick={handleToggle}
-            title={"Toggle Layout"}
-            className="text-3xl relative"
-          >
-            <span className="text-xs absolute -top-3 -right-4 bg-blue-500 text-white rounded-full w-5 h-5 flex justify-center items-center">
-              <span className="w-6 h-6 bg-blue-300 -z-10 absolute rounded-full animate-ping"></span>
-              {designIndex + 1}
-            </span>
-            <LuLayoutDashboard />
-          </button>
+        handleAuthState(AUTH_STATE.UN_AUTHENTIC);
+        navigate("/auth", {
+            replace: true,
+        });
+    }, [navigate, handleAuthState]);
 
-          <Link to={"/auth"} className="ml-4">
-            <Button>Register</Button>
-          </Link>
+    // checking user authentic or not
+    useEffect(() => {
+        checkUserAuth();
+    }, [checkUserAuth]);
+
+    if (authState === AUTH_STATE.LOADING)
+        return (
+            <div className="w-full h-screen flex justify-center items-center text-2xl font-medium">
+                Loading...
+            </div>
+        );
+
+    return (
+        <div className="container mx-auto p-5 pt-0">
+            <div className="flex justify-between mb-4 sticky top-0 bg-white">
+                <Link to="/" className="max-w-16">
+                    <img src={GodFatherLogo} alt="" />
+                </Link>
+
+                <div className="flex gap-6 items-center">
+                    <button title={"Home"} className="text-[1.75rem]">
+                        <Link to="/">
+                            <FiHome />
+                        </Link>
+                    </button>
+
+                    <button title={"Edit Profile"} className="text-[1.75rem]">
+                        <Link to={"/edit/basic"}>
+                            <FiEdit />
+                        </Link>
+                    </button>
+
+                    <button
+                        onClick={handleToggle}
+                        title={"Toggle Layout"}
+                        className="text-3xl relative"
+                    >
+                        <span className="text-xs absolute -top-3 -right-4 bg-blue-500 text-white rounded-full w-5 h-5 flex justify-center items-center">
+                            <span className="w-6 h-6 bg-blue-300 -z-10 absolute rounded-full animate-ping"></span>
+                            {designIndex + 1}
+                        </span>
+                        <LuLayoutDashboard />
+                    </button>
+
+                    <Link to={"/auth"} className="ml-4">
+                        <Button>Register</Button>
+                    </Link>
+                </div>
+            </div>
+            <Outlet />
         </div>
-      </div>
-      <Outlet />
-    </div>
-  );
+    );
 };
 
 export default NavLayout;

@@ -60,13 +60,16 @@ const OTPForm = ({
 
     async function onVerifyOtp(data) {
         try {
-            await api.post(`/auth/${url}/${email}`, {
+            const {
+                data: { user },
+            } = await api.post(`/auth/${url}/${email}`, {
                 ...data,
                 otp: otpBoxes.join(""),
             });
 
             toast.success("Logged In");
             navigate("/", { replace: true });
+            localStorage.setItem("USER", JSON.stringify(user));
         } catch (res) {
             toast.error(res?.response?.data?.message || "Request Failed");
         }

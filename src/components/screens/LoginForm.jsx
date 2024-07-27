@@ -41,14 +41,16 @@ const LoginForm = () => {
     async function onSubmit(data) {
         try {
             if (loginType === "password") {
-                await api.post("/auth/login", data);
+                const {
+                    data: { user },
+                } = await api.post("/auth/login", data);
 
                 toast.success("Logged In");
                 navigate("/", {
                     replace: true,
                 });
+                localStorage.setItem("USER", JSON.stringify(user));
             } else {
-
                 await api.get(`/auth/sent/otp/${data.email}`);
 
                 toast.success("Email Sent Successfully");
