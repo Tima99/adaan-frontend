@@ -71,9 +71,9 @@ const NavLayout = () => {
                         <LuLayoutDashboard />
                     </button>
 
-                    <Link to={"/auth"} className="ml-4">
+                    {/* <Link to={"/auth"} className="ml-4">
                         <Button>Register</Button>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             <Outlet />
