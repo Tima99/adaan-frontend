@@ -1,9 +1,9 @@
-import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Input, { IWraper } from "../../Input";
 import Button from "../../Button";
+import { motion, AnimatePresence } from "framer-motion";
 
 const schema = z.object({
   qualifications: z.array(
@@ -70,47 +70,56 @@ const QualificationForm = () => {
         </Button.Outline>
       </div>
       <div className="grid gap-4 grid-cols-1 xl:grid-cols-2">
-        {fields.map((item, index) => (
-          <IWraper key={item.id} errors={errors} register={register}>
-            <div className="grid gap-4 p-4 border border-gray-300 rounded-md mb-4 xl:mb-0">
-              <Input
-                label="Degree"
-                name={`qualifications.${index}.degree`}
-                validation={{ required: "Degree is required" }}
-              />
-              <Input
-                label="College Name"
-                name={`qualifications.${index}.college`}
-                validation={{ required: "College Name is required" }}
-              />
-              <Input
-                label="Start Date"
-                name={`qualifications.${index}.startDate`}
-                type="date"
-                validation={{ required: "Start Date is required" }}
-              />
-              <Input
-                label="Passed Out Date"
-                name={`qualifications.${index}.endDate`}
-                type="date"
-              />
-              <Input
-                label="CGPA"
-                name={`qualifications.${index}.cgpa`}
-                type="text"
-                validation={{
-                  pattern: {
-                    value: /^\d+(\.\d+)?$/,
-                    message: "CGPA must be a number",
-                  },
-                }}
-              />
-              <Button.Outline onClick={() => remove(index)}>
-                Remove
-              </Button.Outline>
-            </div>
-          </IWraper>
-        ))}
+        <AnimatePresence>
+          {fields.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="p-4 border border-gray-300 rounded-md mb-4 xl:mb-0"
+            >
+              <IWraper errors={errors} register={register}>
+                <Input
+                  label="Degree"
+                  name={`qualifications.${index}.degree`}
+                  validation={{ required: "Degree is required" }}
+                />
+                <Input
+                  label="College Name"
+                  name={`qualifications.${index}.college`}
+                  validation={{ required: "College Name is required" }}
+                />
+                <Input
+                  label="Start Date"
+                  name={`qualifications.${index}.startDate`}
+                  type="date"
+                  validation={{ required: "Start Date is required" }}
+                />
+                <Input
+                  label="Passed Out Date"
+                  name={`qualifications.${index}.endDate`}
+                  type="date"
+                />
+                <Input
+                  label="CGPA"
+                  name={`qualifications.${index}.cgpa`}
+                  type="text"
+                  validation={{
+                    pattern: {
+                      value: /^\d+(\.\d+)?$/,
+                      message: "CGPA must be a number",
+                    },
+                  }}
+                />
+                <Button.Outline onClick={() => remove(index)} type="button">
+                  Remove
+                </Button.Outline>
+              </IWraper>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <Button type="submit" className="mt-4">
         Submit
