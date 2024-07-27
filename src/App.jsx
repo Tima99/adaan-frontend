@@ -8,6 +8,7 @@ import { DesignProvider } from "./contexts/DesignIndexContext";
 import BasicDetails from "./components/screens/EditProfile/BasicDetails";
 import ContactDetails from "./components/screens/EditProfile/ContactDetails";
 import PastExperience from "./components/screens/EditProfile/PastExperience";
+import QualificationForm from "./components/screens/EditProfile/Qualification";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path="basic" element={<BasicDetails />} />
                         <Route path="contact" element={<ContactDetails />} />
                         <Route path="experience" element={<PastExperience />} />
+                        <Route path="qualification" element={<QualificationForm />} />
                     </Route>
                 </Route>
                 <Route path="/auth" element={<Auth />} />

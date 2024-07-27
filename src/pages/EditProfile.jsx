@@ -6,6 +6,7 @@ const EditProfile = () => {
         { id: "basic", label: "Basic Details" },
         { id: "contact", label: "Contact Details" },
         { id: "experience", label: "Past Experience" },
+        { id: "qualification", label: "Qualification" },
     ];
 
     return (
