@@ -2,7 +2,7 @@
 import Boy from "../../../assets/ak47.jpg";
 
 const Layout2 = ({ profile }) => {
-    if (!profile) return <div className="w-full py-20 text-xl">No Profile Found</div>;
+    if (!profile) return <div className="w-full py-20 text-xl text-center">No Profile Found</div>;
 
     return (
         <div className="max-w-3xl mx-auto p-5">

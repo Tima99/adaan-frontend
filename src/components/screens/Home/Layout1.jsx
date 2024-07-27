@@ -14,7 +14,7 @@ const Layout1 = ({ profile }) => {
         "Tailwind CSS",
     ];
 
-    if (!profile) return <div className="w-full py-20 text-xl">No Profile Found</div>;
+    if (!profile) return <div className="w-full py-20 text-xl text-center">No Profile Found</div>;
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">

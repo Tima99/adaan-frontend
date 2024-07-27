@@ -2,7 +2,7 @@
 import Boy from "../../../assets/ak47.jpg";
 
 const Layout3 = ({ profile }) => {
-    if (!profile) return <div className="w-full py-20 text-xl">No Profile Found</div>;
+    if (!profile) return <div className="w-full py-20 text-xl text-center">No Profile Found</div>;
 
     return (
         <div className="p-5 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg text-white">
