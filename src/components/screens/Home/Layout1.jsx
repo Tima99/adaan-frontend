@@ -1,27 +1,7 @@
+/* eslint-disable react/prop-types */
 import Boy from "../../../assets/ak47.jpg";
 
-const Layout1 = () => {
-    const experience = [
-        {
-            company: "Company A",
-            role: "Software Engineer",
-            duration: "Jan 2023 - Present",
-            description:
-                "Worked on various web development projects using MERN stack.",
-        },
-        {
-            company: "Company B",
-            role: "Intern",
-            duration: "Jun 2022 - Dec 2022",
-            description:
-                "Assisted in developing and maintaining web applications.",
-        },
-    ];
-
-    const qualifications = [
-        "Bachelor of Technology in Computer Science",
-        "Certified MERN Stack Developer",
-    ];
+const Layout1 = ({ profile }) => {
 
     const skills = [
         "JavaScript",
@@ -34,29 +14,31 @@ const Layout1 = () => {
         "Tailwind CSS",
     ];
 
+    if (!profile) return <div className="w-full py-20 text-xl">No Profile Found</div>;
+
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
             <div className="flex flex-col items-center">
                 <div className="w-28 h-28 rounded-full bg-gray-500 overflow-hidden">
                     <img
-                        src={Boy}
+                        src={`http://localhost:8000/${profile.basicDetail?.image}` || Boy}
                         alt="Profile"
                         className="w-full h-full object-cover"
                     />
                 </div>
-                <h1 className="text-xl font-bold mt-4">Amit Kumar</h1>
-                <p className="text-gray-600">+91 7210019195</p>
-                <p className="text-gray-600">amit208201@gmail.com</p>
+                <h1 className="text-xl font-bold mt-4">{profile.basicDetail?.name}</h1>
+                <p className="text-gray-600">{profile.contactDetail?.phone}</p>
+                <p className="text-gray-600">{profile.contactDetail?.email}</p>
             </div>
 
             <div className="mt-8">
                 <h2 className="text-2xl font-bold mb-4">Past Experience</h2>
-                {experience.map((exp, index) => (
+                {profile.experiences?.map((exp, index) => (
                     <div key={index} className="mb-6">
                         <h3 className="text-xl font-semibold">{exp.company}</h3>
-                        <p className="text-gray-600">{exp.role}</p>
-                        <p className="text-gray-500">{exp.duration}</p>
-                        <p className="text-gray-700">{exp.description}</p>
+                        <p className="text-gray-600">{exp.position}</p>
+                        <p className="text-gray-500">{exp.startDate?.split('T')[0]} - {exp.endDate?.split('T')[0] || "Present"}</p>
+                        <p className="text-gray-700">{exp.summary}</p>
                     </div>
                 ))}
             </div>
@@ -64,9 +46,9 @@ const Layout1 = () => {
             <div className="mt-8">
                 <h2 className="text-2xl font-bold mb-4">Qualifications</h2>
                 <ul className="list-disc list-inside">
-                    {qualifications.map((qualification, index) => (
+                    {profile.qualifications?.map((qualification, index) => (
                         <li key={index} className="text-gray-700">
-                            {qualification}
+                            {qualification.degree}
                         </li>
                     ))}
                 </ul>
