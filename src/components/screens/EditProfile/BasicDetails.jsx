@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input, { IWraper } from "../../Input";
 import Button from "../../Button";
 import { FaUpload } from "react-icons/fa";
@@ -14,12 +14,12 @@ const BasicDetails = () => {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-        setValue
+        setValue,
     } = form;
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
-        setValue("image", file)
+        setValue("image", file);
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => setProfileImage(reader.result);
@@ -28,6 +28,21 @@ const BasicDetails = () => {
     };
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const {
+                    data: { data },
+                } = await authApi.get(`/profile/basicDetail`);
+                setProfileImage(`http://localhost:8000/${data?.image}`);
+                setValue("image", data.image);
+                setValue("name", data.name);
+            } catch (error) {
+                toast.error("Could not fetch data");
+            }
+        })();
+    }, [setValue]);
 
     async function onSubmit(data) {
         try {
@@ -41,7 +56,7 @@ const BasicDetails = () => {
                 },
             });
             toast.success("Saved Successfully");
-            navigate("/edit/contact")
+            navigate("/edit/contact");
         } catch (error) {
             toast.error(error?.response?.data?.message || "Request Failed");
         }
