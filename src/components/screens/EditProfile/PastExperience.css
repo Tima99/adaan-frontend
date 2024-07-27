@@ -6,8 +6,8 @@
 }
 
 .heading {
-  font-size: 2rem;
   font-weight: bold;
+  @apply text-2xl;
 }
 
 .experiences-container {

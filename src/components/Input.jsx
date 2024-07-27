@@ -5,7 +5,9 @@ import { createContext, useContext, useId } from "react";
 const InputContext = createContext();
 
 function getValueByString(obj, path) {
-  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+  return path.split(".")?.length > 0
+    ? path.split(".").reduce((acc, part) => acc && acc[part], obj)
+    : obj[path];
 }
 
 export function IWraper({ children, ...rest }) {
@@ -16,7 +18,7 @@ export function IWraper({ children, ...rest }) {
   );
 }
 
-function Input({ label, name, validation, ...rest }) {
+function Input({ label, name, validation, className, labelClass, ...rest }) {
   const {
     errors,
     register,
@@ -26,7 +28,7 @@ function Input({ label, name, validation, ...rest }) {
   const errorMsg = getValueByString(errors, name)?.message;
 
   return (
-    <label htmlFor={id}>
+    <label htmlFor={id} className={labelClass}>
       <div className="flex justify-between">
         <span className="font-semibold text-sm">{label}</span>
         {errorMsg && (
@@ -37,8 +39,8 @@ function Input({ label, name, validation, ...rest }) {
       </div>
       <input
         id={id}
-        className={"p-2 border-primary border outline-none rounded-md w-full"}
         {...rest}
+        className={`p-2 border-primary border outline-none rounded-md w-full ${className}`}
         {...register(name, validation || defaultValidation)}
       />
     </label>

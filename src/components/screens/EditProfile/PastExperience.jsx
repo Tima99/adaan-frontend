@@ -73,12 +73,11 @@ const PastExperience = () => {
         </Button.Outline>
       </div>
       <div className="experiences-container">
-        <AnimatePresence mode="sync">
+        <AnimatePresence>
           {fields.map((item, index) => {
             const currentlyWorking = watch(
               `experiences.${index}.currentlyWorking`
             );
-            console.log(currentlyWorking);
             const summary = watch(`experiences.${index}.summary`);
 
             return (
