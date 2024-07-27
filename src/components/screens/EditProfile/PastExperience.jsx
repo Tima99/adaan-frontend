@@ -138,7 +138,7 @@ const PastExperience = () => {
                         </div>
                       </label>
                     </div>
-                    <Button.Outline onClick={() => remove(index)}>
+                    <Button.Outline type="button" onClick={() => remove(index)}>
                       Remove
                     </Button.Outline>
                   </div>
