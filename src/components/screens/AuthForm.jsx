@@ -29,7 +29,10 @@ const AuthForm = () => {
             ) : (
                 <OTPForm
                     toLink={() => setFormState(FORM_ENUMS.REGISTER)}
+                    email={formState}
                     linkText="New Registration ?"
+                    hasPassword={true}
+                    url={"verify"}
                 />
             )}
         </div>

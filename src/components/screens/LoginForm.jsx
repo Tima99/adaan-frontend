@@ -7,6 +7,9 @@ import Button from "../Button";
 import OTPForm from "./OTPForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import schema, { emailSchema } from "../../validations/Login";
+import api from "../../api";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
     const [icon, setIcon] = useState();
@@ -19,9 +22,11 @@ const LoginForm = () => {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
+        getValues,
     } = useForm({
         resolver: zodResolver(getSchema()),
     });
+    const navigate = useNavigate();
 
     const handleToggle = () => {
         if (type === "password") {
@@ -33,13 +38,24 @@ const LoginForm = () => {
         }
     };
 
-    function onSubmit(data) {
-        // console.log(data);
-        if (loginType === "password") {
-            alert(JSON.stringify(data, null, 2));
-        } else {
-            alert(JSON.stringify(data, null, 2));
-            setLoginType("otp");
+    async function onSubmit(data) {
+        try {
+            if (loginType === "password") {
+                await api.post("/auth/login", data);
+
+                toast.success("Logged In");
+                navigate("/", {
+                    replace: true,
+                });
+            } else {
+
+                await api.get(`/auth/sent/otp/${data.email}`);
+
+                toast.success("Email Sent Successfully");
+                setLoginType("otp");
+            }
+        } catch (res) {
+            toast.error(res?.response?.data?.message || "Request Failed");
         }
     }
 
@@ -48,6 +64,8 @@ const LoginForm = () => {
             <OTPForm
                 toLink={() => setLoginType("password")}
                 linkText="Password Login ?"
+                email={getValues("email")}
+                url={"login"}
             />
         </div>
     ) : (

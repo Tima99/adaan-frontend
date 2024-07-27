@@ -9,10 +9,12 @@ import BasicDetails from "./components/screens/EditProfile/BasicDetails";
 import ContactDetails from "./components/screens/EditProfile/ContactDetails";
 import PastExperience from "./components/screens/EditProfile/PastExperience";
 import QualificationForm from "./components/screens/EditProfile/Qualification";
+import { Toaster } from "react-hot-toast";
 
 function App() {
     return (
         <DesignProvider>
+            <Toaster />
             <Routes>
                 <Route path="/" element={<NavLayout />}>
                     <Route index element={<Home />} />
@@ -20,7 +22,10 @@ function App() {
                         <Route path="basic" element={<BasicDetails />} />
                         <Route path="contact" element={<ContactDetails />} />
                         <Route path="experience" element={<PastExperience />} />
-                        <Route path="qualification" element={<QualificationForm />} />
+                        <Route
+                            path="qualification"
+                            element={<QualificationForm />}
+                        />
                     </Route>
                 </Route>
                 <Route path="/auth" element={<Auth />} />
