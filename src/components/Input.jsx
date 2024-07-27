@@ -4,6 +4,10 @@ import { createContext, useContext, useId } from "react";
 
 const InputContext = createContext();
 
+function getValueByString(obj, path) {
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+}
+
 export function IWraper({ children, ...rest }) {
   return (
     <InputContext.Provider value={rest}>
@@ -19,7 +23,7 @@ function Input({ label, name, validation, ...rest }) {
     validation: defaultValidation,
   } = useContext(InputContext);
   const id = useId();
-  const errorMsg = errors?.[name]?.message;
+  const errorMsg = getValueByString(errors, name)?.message;
 
   return (
     <label htmlFor={id}>

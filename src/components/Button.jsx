@@ -22,7 +22,7 @@ function Outline({ ...rest }) {
     return (
         <Button
             {...rest}
-            className="border-blue-500 bg-transparent text-blue-500 hover:bg-transparent"
+            className="border-blue-500 bg-transparent !text-blue-500 hover:bg-transparent"
         ></Button>
     );
 }
