@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { DesignContext } from "../../contexts/DesignIndexContext";
 import { Link, Outlet } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
+import Button from "../Button";
 
 const NavLayout = () => {
   const { designIndex, handleToggle } = useContext(DesignContext);
@@ -17,7 +18,7 @@ const NavLayout = () => {
           <img src={GodFatherLogo} alt="" />
         </Link>
 
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <button title={"Home"} className="text-[1.75rem]">
             <Link to="/">
               <FiHome />
@@ -35,12 +36,16 @@ const NavLayout = () => {
             title={"Toggle Layout"}
             className="text-3xl relative"
           >
-            <span className="text-xs absolute top-1 -right-4 bg-blue-500 text-white rounded-full w-5 h-5 flex justify-center items-center">
+            <span className="text-xs absolute -top-3 -right-4 bg-blue-500 text-white rounded-full w-5 h-5 flex justify-center items-center">
               <span className="w-6 h-6 bg-blue-300 -z-10 absolute rounded-full animate-ping"></span>
               {designIndex + 1}
             </span>
             <LuLayoutDashboard />
           </button>
+
+          <Link to={"/auth"} className="ml-4">
+            <Button>Register</Button>
+          </Link>
         </div>
       </div>
       <Outlet />
