@@ -89,7 +89,9 @@ const NavLayout = () => {
             <LuLayoutDashboard />
           </button>
 
-          <Button onClick={Logout}>Log Out</Button>
+          <div className="ml-10">
+            <Button onClick={Logout}>Log Out</Button>
+          </div>
         </div>
       </div>
       <Outlet />
