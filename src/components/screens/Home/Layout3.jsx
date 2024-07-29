@@ -36,7 +36,7 @@ const Layout3 = ({ profile }) => {
               <div key={exp._id}>
                 <p className="font-bold">{exp.position}</p>
                 <p>
-                  {exp.company}, &nbsp;{exp.startDate?.split("T")[0]}-
+                  {exp.company}, &nbsp;{exp.startDate?.split("T")[0]} -&nbsp;
                   {exp.endDate?.split("T")[0] || "Present"}
                 </p>
                 <p>{exp.summary}</p>
@@ -55,7 +55,7 @@ const Layout3 = ({ profile }) => {
                 <p className="font-bold">{qual.degree} </p>
                 <p>
                   {qual.college}, &nbsp;
-                  {qual.startDate?.split("T")[0]} -
+                  {qual.startDate?.split("T")[0]} -&nbsp;
                   {qual.endDate?.split("T")[0] || "N/A"}
                 </p>
                 <p>{qual.cgpa}</p>

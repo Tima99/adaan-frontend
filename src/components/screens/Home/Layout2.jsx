@@ -38,7 +38,7 @@ const Layout2 = ({ profile }) => {
               <div key={exp._id}>
                 <p className="font-bold">{exp.position}</p>
                 <p className="text-gray-600">
-                  {exp.company}, &nbsp;{exp.startDate?.split("T")[0]} -
+                  {exp.company}, &nbsp;{exp.startDate?.split("T")[0]} -&nbsp;
                   {exp.endDate?.split("T")[0] || "Present"}
                 </p>
                 <p className="text-gray-600">{exp.summary}</p>
@@ -58,17 +58,13 @@ const Layout2 = ({ profile }) => {
                 <p className="font-bold">{qual.degree} </p>
                 <p className="text-gray-600">
                   {qual.college}, &nbsp;
-                  {qual.startDate?.split("T")[0]} -
+                  {qual.startDate?.split("T")[0]} - &nbsp;
                   {qual.endDate?.split("T")[0] || "N/A"}
                 </p>
                 <p>{qual.cgpa}</p>
               </div>
             );
           })}
-          <div>
-            <p className="font-bold">Higher Secondary Certificate</p>
-            <p className="text-gray-600">XYZ School, 2014 - 2016</p>
-          </div>
         </div>
       </div>
 
