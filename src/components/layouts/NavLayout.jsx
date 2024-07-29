@@ -8,77 +8,90 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
 import Button from "../Button";
 import { useEffect } from "react";
+import { authApi } from "./../../api";
+import { toast } from "react-hot-toast";
 
 const NavLayout = () => {
-    const { designIndex, authState, handleToggle, handleAuthState } =
-        useContext(DesignContext);
+  const { designIndex, authState, handleToggle, handleAuthState } =
+    useContext(DesignContext);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const checkUserAuth = useCallback(() => {
-        let user = localStorage.getItem("USER");
-        user = user && JSON.parse(user);
+  const checkUserAuth = useCallback(() => {
+    let user = localStorage.getItem("USER");
+    user = user && JSON.parse(user);
 
-        if (user?._id) return handleAuthState(AUTH_STATE.AUTHENTIC);
+    if (user?._id) return handleAuthState(AUTH_STATE.AUTHENTIC);
 
-        handleAuthState(AUTH_STATE.UN_AUTHENTIC);
-        navigate("/auth", {
-            replace: true,
-        });
-    }, [navigate, handleAuthState]);
+    handleAuthState(AUTH_STATE.UN_AUTHENTIC);
+    navigate("/auth", {
+      replace: true,
+    });
+  }, [navigate, handleAuthState]);
 
-    // checking user authentic or not
-    useEffect(() => {
-        checkUserAuth();
-    }, [checkUserAuth]);
+  // checking user authentic or not
+  useEffect(() => {
+    checkUserAuth();
+  }, [checkUserAuth]);
 
-    if (authState === AUTH_STATE.LOADING)
-        return (
-            <div className="w-full h-screen flex justify-center items-center text-2xl font-medium">
-                Loading...
-            </div>
-        );
+  const Logout = async () => {
+    try {
+      await authApi.get("/auth/logout");
+      toast.success("Logout Success");
+      navigate("/auth", {
+        replace: true
+      });
+      localStorage.clear()
+    } catch (error) {
+      toast(error?.response?.data?.message || "");
+    }
+  };
 
+  if (authState === AUTH_STATE.LOADING)
     return (
-        <div className="container mx-auto p-5 pt-0">
-            <div className="flex justify-between mb-4 sticky top-0 bg-white">
-                <Link to="/" className="max-w-16">
-                    <img src={GodFatherLogo} alt="" />
-                </Link>
-
-                <div className="flex gap-6 items-center">
-                    <button title={"Home"} className="text-[1.75rem]">
-                        <Link to="/">
-                            <FiHome />
-                        </Link>
-                    </button>
-
-                    <button title={"Edit Profile"} className="text-[1.75rem]">
-                        <Link to={"/edit/basic"}>
-                            <FiEdit />
-                        </Link>
-                    </button>
-
-                    <button
-                        onClick={handleToggle}
-                        title={"Toggle Layout"}
-                        className="text-3xl relative"
-                    >
-                        <span className="text-xs absolute -top-3 -right-4 bg-blue-500 text-white rounded-full w-5 h-5 flex justify-center items-center">
-                            <span className="w-6 h-6 bg-blue-300 -z-10 absolute rounded-full animate-ping"></span>
-                            {designIndex + 1}
-                        </span>
-                        <LuLayoutDashboard />
-                    </button>
-
-                    {/* <Link to={"/auth"} className="ml-4">
-                        <Button>Register</Button>
-                    </Link> */}
-                </div>
-            </div>
-            <Outlet />
-        </div>
+      <div className="w-full h-screen flex justify-center items-center text-2xl font-medium">
+        Loading...
+      </div>
     );
+
+  return (
+    <div className="container mx-auto p-5 pt-0">
+      <div className="flex justify-between mb-4 sticky top-0 bg-white">
+        <Link to="/" className="max-w-16">
+          <img src={GodFatherLogo} alt="" />
+        </Link>
+
+        <div className="flex gap-6 items-center">
+          <button title={"Home"} className="text-[1.75rem]">
+            <Link to="/">
+              <FiHome />
+            </Link>
+          </button>
+
+          <button title={"Edit Profile"} className="text-[1.75rem]">
+            <Link to={"/edit/basic"}>
+              <FiEdit />
+            </Link>
+          </button>
+
+          <button
+            onClick={handleToggle}
+            title={"Toggle Layout"}
+            className="text-3xl relative"
+          >
+            <span className="text-xs absolute -top-3 -right-4 bg-blue-500 text-white rounded-full w-5 h-5 flex justify-center items-center">
+              <span className="w-6 h-6 bg-blue-300 -z-10 absolute rounded-full animate-ping"></span>
+              {designIndex + 1}
+            </span>
+            <LuLayoutDashboard />
+          </button>
+
+          <Button onClick={Logout}>Log Out</Button>
+        </div>
+      </div>
+      <Outlet />
+    </div>
+  );
 };
 
 export default NavLayout;
