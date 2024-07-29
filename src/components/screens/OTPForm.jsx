@@ -129,7 +129,7 @@ const OTPForm = ({
 
                 <Button
                     type="submit"
-                    className={"2xl:mx-[12%] mx-0 w-full"}
+                    className={"mx-0 w-full"}
                     disabled={isSubmitting}
                 >
                     {isSubmitting ? "Processing..." : "Verify"}
