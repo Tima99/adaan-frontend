@@ -60,6 +60,7 @@ const PastExperience = () => {
                 const {
                     data: { data },
                 } = await authApi.get(`/profile/experiences`);
+                if(!data) return;
                 setValue(
                     "experiences",
                     data?.map((item) => ({

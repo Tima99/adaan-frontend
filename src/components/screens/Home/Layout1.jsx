@@ -21,7 +21,7 @@ const Layout1 = ({ profile }) => {
             <div className="flex flex-col items-center">
                 <div className="w-28 h-28 rounded-full bg-gray-500 overflow-hidden">
                     <img
-                        src={`http://localhost:8000/${profile.basicDetail?.image}` || Boy}
+                        src={`${import.meta.env.VITE_ASSETS_URL}/${profile.basicDetail?.image}` || Boy}
                         alt="Profile"
                         className="w-full h-full object-cover"
                     />

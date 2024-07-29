@@ -65,6 +65,7 @@ const QualificationForm = () => {
                 const {
                     data: { data },
                 } = await authApi.get(`/profile/qualifications`);
+                if(!data) return;
                 setValue(
                     "qualifications",
                     data?.map((item) => ({

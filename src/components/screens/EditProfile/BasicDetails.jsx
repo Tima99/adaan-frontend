@@ -35,7 +35,8 @@ const BasicDetails = () => {
                 const {
                     data: { data },
                 } = await authApi.get(`/profile/basicDetail`);
-                setProfileImage(`http://localhost:8000/${data?.image}`);
+                if(!data) return;
+                setProfileImage(`${import.meta.env.VITE_ASSETS_URL}/${data?.image}`);
                 setValue("image", data.image);
                 setValue("name", data.name);
             } catch (error) {

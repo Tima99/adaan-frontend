@@ -10,7 +10,7 @@ const Layout3 = ({ profile }) => {
                 <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white">
                     <img
                         src={
-                            `http://localhost:8000/${profile.basicDetail?.image}` ||
+                            `${import.meta.env.VITE_ASSETS_URL}/${profile.basicDetail?.image}` ||
                             Boy
                         }
                         alt="Profile"

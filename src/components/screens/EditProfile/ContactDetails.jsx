@@ -46,6 +46,7 @@ const ContactDetails = () => {
                 const {
                     data: { data },
                 } = await authApi.get(`/profile/contactDetail`);
+                if(!data) return;
                 setValue("email", data.email);
                 setValue("phone", data.phone);
             } catch (error) {

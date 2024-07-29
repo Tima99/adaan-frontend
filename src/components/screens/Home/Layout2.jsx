@@ -11,7 +11,7 @@ const Layout2 = ({ profile }) => {
                 <div className="w-28 h-28 rounded-full bg-gray-500 overflow-hidden object-cover">
                     <img
                         src={
-                            `http://localhost:8000/${profile.basicDetail?.image}` ||
+                            `${import.meta.env.VITE_ASSETS_URL}/${profile.basicDetail?.image}` ||
                             Boy
                         }
                         alt="Profile"
