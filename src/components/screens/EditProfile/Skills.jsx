@@ -33,7 +33,7 @@ function SkillsForm() {
         const {
           data: { data },
         } = await authApi.get(`/profile/skills`);
-        if (!data) return;
+        if (!data?.length) return;
         setSkills(data);
       } catch (error) {
         toast.error("Could not fetch data");

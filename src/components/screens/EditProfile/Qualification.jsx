@@ -47,7 +47,6 @@ const QualificationForm = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             await authApi.patch(`/profile/qualifications`, [
                 ...data.qualifications,
@@ -64,7 +63,7 @@ const QualificationForm = () => {
                 const {
                     data: { data },
                 } = await authApi.get(`/profile/qualifications`);
-                if(!data) return;
+                if(!data?.length) return;
                 setValue(
                     "qualifications",
                     data?.map((item) => ({
