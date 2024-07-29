@@ -8,11 +8,19 @@ import { authApi } from "../../../api";
 
 function SkillsForm() {
   const [skills, setSkills] = useState([]);
+  const [error, setError] = useState("");
   const methods = useForm();
 
   const addSkill = (skill) => {
-    if (skill && !skills.includes(skill)) {
+    if (
+      skill &&
+      !skills.some((val) => val.toLowerCase() === skill.toLowerCase())
+    ) {
       setSkills((prevSkills) => [...prevSkills, skill]);
+      methods.reset();
+      setError("");
+    } else {
+      setError("Skill already added");
     }
   };
 
@@ -20,11 +28,11 @@ function SkillsForm() {
     setSkills((prevSkills) =>
       prevSkills.filter((skill) => skill !== skillToRemove)
     );
+    setError("");
   };
 
   const onSubmit = (data) => {
     addSkill(data.skill);
-    methods.reset();
   };
 
   useEffect(() => {
@@ -67,21 +75,23 @@ function SkillsForm() {
           />
           <Button type="submit">Add</Button>
         </form>
-        <div className="mt-4 flex gap-4">
-          {skills.map((skill) => (
-            <div
-              key={skill}
-              className="flex items-center gap-2 p-2 border rounded mb-2"
-            >
-              <span>{skill}</span>
-              <FaTimes
-                className="text-red-500 cursor-pointer"
-                onClick={() => removeSkill(skill)}
-              />
-            </div>
-          ))}
-        </div>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
       </IWraper>
+
+      <div className="mt-4 flex gap-4 flex-wrap">
+        {skills.map((skill) => (
+          <div
+            key={skill}
+            className="flex items-center gap-2 p-2 border rounded mb-2"
+          >
+            <span>{skill}</span>
+            <FaTimes
+              className="text-red-500 cursor-pointer"
+              onClick={() => removeSkill(skill)}
+            />
+          </div>
+        ))}
+      </div>
       <Button
         disabled={methods.formState.isSubmitting}
         onClick={handleSubmitSkills}
