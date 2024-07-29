@@ -1,10 +1,9 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Input, { IWraper } from "../../Input";
 import Button from "../../Button";
 import "./PastExperience.css";
-import { motion, AnimatePresence } from "framer-motion";
 import { authApi } from "../../../api";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -17,21 +16,14 @@ const schema = z.object({
       company: z.string().min(1, { message: "Company is required" }),
       startDate: z.string().min(1, { message: "Start Date is required" }),
       endDate: z.string().optional(),
-      currentlyWorking: z.optional(),
+      isCurrentlyWorking: z.boolean().optional(),
       summary: z.string().max(300, "Summary can't exceed 300 characters"),
     })
   ),
 });
 
 const PastExperience = () => {
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState: { errors, isSubmitting },
-    watch,
-    setValue,
-  } = useForm({
+  const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
       experiences: [
@@ -46,6 +38,15 @@ const PastExperience = () => {
       ],
     },
   });
+
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+    watch,
+    setValue,
+  } = methods;
 
   const navigate = useNavigate();
 
@@ -87,7 +88,7 @@ const PastExperience = () => {
   };
 
   return (
-    <form>
+    <FormProvider {...methods}>
       <div className="header-container">
         <h2 className="heading">Past Experience</h2>
         <Button.Outline
@@ -186,7 +187,7 @@ const PastExperience = () => {
       >
         Submit
       </Button>
-    </form>
+    </FormProvider>
   );
 };
 
