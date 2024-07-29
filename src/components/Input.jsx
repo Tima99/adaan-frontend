@@ -13,7 +13,7 @@ function getValueByString(obj, path) {
 export function IWraper({ children, ...rest }) {
   return (
     <InputContext.Provider value={rest}>
-      <div className="flex gap-4 flex-col">{children}</div>
+      <div className="flex gap-4 flex-col w-full">{children}</div>
     </InputContext.Provider>
   );
 }
