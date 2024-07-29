@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Input, { IWraper } from "../../Input";
 import Button from "../../Button";
-import { motion, AnimatePresence } from "framer-motion";
 import { authApi } from "../../../api";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";

@@ -9,6 +9,7 @@ import BasicDetails from "./components/screens/EditProfile/BasicDetails";
 import ContactDetails from "./components/screens/EditProfile/ContactDetails";
 import PastExperience from "./components/screens/EditProfile/PastExperience";
 import QualificationForm from "./components/screens/EditProfile/Qualification";
+import SkillsForm from "./components/screens/EditProfile/Skills";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
                         <Route
                             path="qualification"
                             element={<QualificationForm />}
+                        />
+                        <Route
+                            path="skills"
+                            element={<SkillsForm />}
                         />
                     </Route>
                 </Route>

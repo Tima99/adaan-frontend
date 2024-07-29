@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 
 const EditProfile = () => {
@@ -8,6 +7,7 @@ const EditProfile = () => {
         { id: "contact", label: "Contact Details" },
         { id: "experience", label: "Past Experience" },
         { id: "qualification", label: "Qualification" },
+        { id: "skills", label: "Skills" },
     ];
 
     return (
