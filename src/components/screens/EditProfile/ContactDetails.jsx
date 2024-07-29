@@ -13,12 +13,13 @@ const schema = z.object({
   phone: z
     .string()
     .regex(/^\d+$/, { message: "Phone must contain only numbers (0-9)" }),
+  socialUrls: z.array(z.string()).optional()
 });
 
 const ContactDetails = () => {
   const methods = useForm({
     defaultValues: {
-      socialUrls: [""],
+      socialUrls: [],
     },
     resolver: zodResolver(schema),
   });
@@ -51,7 +52,7 @@ const ContactDetails = () => {
         if (!data) return;
         setValue("email", data.email);
         setValue("phone", data.phone);
-        setValue("socialUrls", data.socialUrls || [""]);
+        setValue("socialUrls", data.socialUrls || []);
       } catch (error) {
         toast.error("Could not fetch data");
       }
