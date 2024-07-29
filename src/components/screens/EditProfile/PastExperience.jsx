@@ -1,4 +1,4 @@
-import { useForm, useFieldArray, FormProvider } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Input, { IWraper } from "../../Input";
@@ -88,7 +88,7 @@ const PastExperience = () => {
   };
 
   return (
-    <FormProvider {...methods}>
+    <div>
       <div className="header-container">
         <h2 className="heading">Past Experience</h2>
         <Button.Outline
@@ -187,7 +187,7 @@ const PastExperience = () => {
       >
         Submit
       </Button>
-    </FormProvider>
+    </div>
   );
 };
 
