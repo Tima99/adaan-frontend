@@ -13,7 +13,6 @@ const schema = z.object({
   phone: z
     .string()
     .regex(/^\d+$/, { message: "Phone must contain only numbers (0-9)" }),
-  socialUrls: z.array(z.string().url({ message: "Invalid URL" })),
 });
 
 const ContactDetails = () => {

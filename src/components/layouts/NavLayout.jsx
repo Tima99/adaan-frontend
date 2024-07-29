@@ -36,12 +36,15 @@ const NavLayout = () => {
 
   const Logout = async () => {
     try {
+      const logout = confirm("Do you want to logout?");
+      if (!logout) return;
+
       await authApi.get("/auth/logout");
       toast.success("Logout Success");
       navigate("/auth", {
-        replace: true
+        replace: true,
       });
-      localStorage.clear()
+      localStorage.clear();
     } catch (error) {
       toast(error?.response?.data?.message || "");
     }
